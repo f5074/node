@@ -12,16 +12,16 @@ block content -%}
     <hr />
 
     <ul>
+      {% for memo in contact.Memo %}
       <li>
-        메모템플릿 (
-        <a
-          href="/admin/contacts/delete/"
-          onclick="return confirm('삭제하시겠습니까?')"
-        >
+        {{ memo.content }}
+        (
+        <a href="/admin/contacts/delete/{{ contact.id }}/{{ memo.id }}" onclick="return confirm('삭제하시겠습니까?')">
           삭제
         </a>
         )
       </li>
+      {% endfor %}
     </ul>
 
     메모작성하기

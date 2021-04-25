@@ -10,6 +10,14 @@ module.exports = function (sequelize, DataTypes) {
 
   // 이 아래 작성하세요.
 
+  Contacts.associate = (models) => {
+
+    Contacts.hasMany(models.ContactsMemo,
+      { as: 'Memo', foreignKey: 'contact_id', sourceKey: 'id', onDelete: 'CASCADE' }
+    );
+
+  }
+
   Contacts.prototype.dateFormat = (date) => moment(date).format("YYYY-MM-DD");
 
   return Contacts;

@@ -4,7 +4,7 @@ exports.get_contacts = async (_, res) => {
   try {
     const contacts = await models.Contacts.findAll({});
     res.render("admin/contacts.html", { contacts });
-  } catch (e) {}
+  } catch (e) { }
 };
 
 exports.get_contacts_write = (_, res) => {
@@ -15,22 +15,30 @@ exports.post_contacts_write = async (req, res) => {
   try {
     await models.Contacts.create(req.body);
     res.redirect("/admin/contacts");
-  } catch (e) {}
+  } catch (e) { }
 };
 
 exports.get_contacts_detail = async (req, res) => {
   try {
-    const contact = await models.Contacts.findByPk(req.params.id);
+    const contact = await models.Contacts.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [
+        'Memo'
+      ]
+    });
+
 
     res.render("admin/detail.html", { contact });
-  } catch (e) {}
+  } catch (e) { }
 };
 
 exports.get_contacts_edit = async (req, res) => {
   try {
     const contact = await models.Contacts.findByPk(req.params.id);
     res.render("admin/write.html", { contact });
-  } catch (e) {}
+  } catch (e) { }
 };
 
 exports.post_contacts_edit = async (req, res) => {
@@ -39,7 +47,7 @@ exports.post_contacts_edit = async (req, res) => {
       where: { id: req.params.id }
     });
     res.redirect(`/admin/contacts/detail/${req.params.id}`);
-  } catch (e) {}
+  } catch (e) { }
 };
 
 exports.get_contacts_delete = async (req, res) => {
@@ -50,11 +58,40 @@ exports.get_contacts_delete = async (req, res) => {
       }
     });
     res.redirect("/admin/contacts");
-  } catch (e) {}
+  } catch (e) { }
 };
 
 // 작성해주세요
-exports.add_memo = async (req, res) => {};
+exports.add_memo = async (req, res) => {
+
+  try {
+
+    const contacts = await models.Contacts.findByPk(req.params.id);
+    await contacts.createMemo(req.body);
+    res.redirect('/admin/contacts/detail/' + req.params.id);
+
+  } catch (e) {
+    console.log(e)
+  }
+
+
+};
 
 // 작성해주세요
-exports.remove_memo = async (req, res) => {};
+exports.remove_memo = async (req, res) => {
+
+  try {
+
+    await models.ContactsMemo.destroy({
+      where: {
+        id: req.params.memo_id
+      }
+    });
+
+    res.redirect('/admin/contacts/detail/' + req.params.contact_id);
+
+  } catch (e) {
+
+  }
+
+};

@@ -19,10 +19,20 @@ exports.post_join = async (req, res) => {
       );
     */
 
-    await models.User.create(req.body);
-    res.send(
-      '<script>alert("회원가입 성공");\
-    location.href="/accounts/login";</script>'
-    );
-  } catch (e) {}
+    const value = await models.User.findOne({where : {username : req.body.username}});
+    console.log(value);
+    if(!value){
+      models.User.create(req.body);
+      res.send(
+        '<script>alert("회원가입 성공");\
+      location.href="/accounts/login";</script>'
+      );
+    }else{
+      res.send(
+        '<script>window.history.back(alert("존재하는 아이디 입니다."))</script>'
+      );
+    }
+
+
+  } catch (e) { }
 };
