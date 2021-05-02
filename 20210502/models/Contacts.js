@@ -17,6 +17,19 @@ module.exports = function (sequelize, DataTypes) {
     });
   };
 
+  Contacts.associate = (models) => {
+    Contacts.belongsToMany(models.User, {
+      through: {
+        model: 'ContactsUser',
+        unique: false
+      },
+      as: "User",
+      foreignKey: "contact_id",
+      sourceKey: "id",
+      constraints: false
+    });
+  };
+
   Contacts.prototype.dateFormat = (date) => moment(date).format("YYYY-MM-DD");
 
   return Contacts;
