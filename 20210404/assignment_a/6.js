@@ -8,22 +8,38 @@
 
 const express = require("express");
 
-// 이 아래로 작성해주세요.
-var app = express();
+// // 이 아래로 작성해주세요.
+// var app = express();
+// const port = 3000;
+
+
+// function getUrl(req) {
+//   var url = req.protocol + "://" + req.headers.host + req.url;
+//   return url;
+// }
+
+// app.get('/', function (req, res) {
+//   res.send(getUrl(req));
+// });
+
+// app.get('/admin/products', function (req, res) {
+//   res.send(getUrl(req));
+// });
+
+// app.listen(port, function () {
+//   console.log("Express listening on port", port);
+// });
+
+
+const app = express();
 const port = 3000;
 
-
-function getUrl(req) {
-  var url = req.protocol + "://" + req.headers.host + req.url;
-  return url;
-}
-
-app.get('/', function (req, res) {
-  res.send(getUrl(req));
+app.get("/", (req, res) => {
+  res.send("/");
 });
 
-app.get('/admin/products', function (req, res) {
-  res.send(getUrl(req));
+app.get("/admin/products", (req, res) => {
+  res.send("/admin/products");
 });
 
 app.listen(port, function () {

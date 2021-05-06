@@ -8,11 +8,16 @@ const programming = [
   { name: "java", number: 20 }
 ];
 
-console.log(
-  // 작성해주세요
-  programming.reduce((accumulator, currentValue) => {
-    accumulator.number += currentValue.number;
-    return accumulator;
-  }, { number: 0 })
-);
+// console.log(
+//   // 작성해주세요
+//   programming.reduce((accumulator, currentValue) => {
+//     accumulator.number += currentValue.number;
+//     return accumulator;
+//   }, { number: 0 })
+// );
 
+console.log(
+  programming.reduce((acc, current) => ({
+    number: acc.number + current.number
+  }))
+);

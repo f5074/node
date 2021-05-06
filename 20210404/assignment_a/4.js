@@ -12,10 +12,15 @@ class Car {
     this.name = a;
     this.color = b;
   }
-  move(){
-    return console.log(this.name + "차이고 " + this.color + "색입니다.");
-  }
+  // move(){
+  //   return console.log(this.name + "차이고 " + this.color + "색입니다.");
+  // }
 }
+
+Car.prototype.move = function () {
+  console.log(this.name + "차이고 " + this.color + "색입니다.");
+};
+
 
 var a = new Car("현대", "노란");
 a.move();

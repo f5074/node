@@ -6,11 +6,14 @@ const programming = [
   { name: "java", number: 20 }
 ];
 
-console.log(
-  // filter 함수를 완성해주세요.
-  programming.filter(function (n) {
-    if (n.name.length < 5) {
-      return n;
-    }
-  })
-);
+// console.log(
+//   // filter 함수를 완성해주세요.
+//   programming.filter(function (n) {
+//     if (n.name.length < 5) {
+//       return n;
+//     }
+//   })
+// );
+
+
+console.log(programming.filter((x) => x.name.length < 5));

@@ -13,13 +13,16 @@ const programming = [
   { name: "java", number: 20 }
 ];
 
-console.log(
-  // 작성해주세요.
-  programming.sort((y, x) => {
-    if (x.number > y.number) {
-      return 1;
-    } else {
-      return -1;
-    }
-  })
-);
+// console.log(
+//   // 작성해주세요.
+//   programming.sort((y, x) => {
+//     if (x.number > y.number) {
+//       return 1;
+//     } else {
+//       return -1;
+//     }
+//   })
+// );
+
+
+console.log(programming.sort((x, y) => x.number - y.number));
