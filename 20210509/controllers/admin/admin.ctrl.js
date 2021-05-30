@@ -4,7 +4,7 @@ exports.get_contacts = async (_, res) => {
   try {
     const contacts = await models.Contacts.findAll({});
     res.render("admin/contacts.html", { contacts });
-  } catch (e) {}
+  } catch (e) { }
 };
 
 exports.get_contacts_write = (_, res) => {
@@ -12,19 +12,27 @@ exports.get_contacts_write = (_, res) => {
 };
 
 exports.post_contacts_write = async (req, res) => {
+
   try {
-    // 여기작성
+    // 위도 경도 저장
     req.body.geo = {
       type: 'Point',
       coordinates: [
+        // 경도
         req.body.geo.split(',')[0],
+        // 위도
         req.body.geo.split(',')[1]
       ]
     };
+
     await models.Contacts.create(req.body);
     res.redirect("/admin/contacts");
-  } catch (e) {}
+  } catch (e) {
+
+  }
 };
+
+
 
 exports.get_contacts_detail = async (req, res) => {
   try {
@@ -36,32 +44,42 @@ exports.get_contacts_detail = async (req, res) => {
     });
 
     res.render("admin/detail.html", { contact });
-  } catch (e) {}
+  } catch (e) { }
 };
 
 exports.get_contacts_edit = async (req, res) => {
   try {
     const contact = await models.Contacts.findByPk(req.params.id);
     res.render("admin/write.html", { contact });
-  } catch (e) {}
+  } catch (e) { }
 };
 
 exports.post_contacts_edit = async (req, res) => {
   try {
-    // 여기 작성
+
+    // 위도 경도 저장
     req.body.geo = {
       type: 'Point',
       coordinates: [
+        // 경도
         req.body.geo.split(',')[0],
+        // 위도
         req.body.geo.split(',')[1]
       ]
     };
-    await models.Contacts.update(req.body, {
-      where: { id: req.params.id }
-    });
+
+    await models.Contacts.update(req.body,
+      {
+        where: { id: req.params.id }
+      }
+    );
     res.redirect(`/admin/contacts/detail/${req.params.id}`);
-  } catch (e) {}
+
+  } catch (e) {
+
+  }
 };
+
 
 exports.get_contacts_delete = async (req, res) => {
   try {
@@ -71,7 +89,7 @@ exports.get_contacts_delete = async (req, res) => {
       }
     });
     res.redirect("/admin/contacts");
-  } catch (e) {}
+  } catch (e) { }
 };
 
 exports.add_memo = async (req, res) => {
@@ -95,5 +113,5 @@ exports.remove_memo = async (req, res) => {
     });
 
     res.redirect("/admin/contacts/detail/" + req.params.contact_id);
-  } catch (e) {}
+  } catch (e) { }
 };

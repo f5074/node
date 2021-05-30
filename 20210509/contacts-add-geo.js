@@ -8,8 +8,8 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-     return queryInterface.addColumn('Contacts', 'geo', {
-      type: Sequelize.DataTypes.GEOMETRY('POINT'),
+    return queryInterface.addColumn("Contacts", "geo", {
+      type: Sequelize.DataTypes.GEOMETRY("POINT")
     });
   },
 
@@ -20,6 +20,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-     return queryInterface.removeColumn('Contacts', 'geo');
+    return queryInterface.removeColumn("Contacts", "geo");
   }
 };
