@@ -1,14 +1,9 @@
-const passwordHash = require("../helpers/passwordHash");
+const passwordHash = require('../helpers/passwordHash');
 
 module.exports = function (sequelize, DataTypes) {
-  const User = sequelize.define(
-    "User",
+  const User = sequelize.define('User',
     {
-      id: {
-        type: DataTypes.BIGINT.UNSIGNED,
-        primaryKey: true,
-        autoIncrement: true
-      },
+      id: { type: DataTypes.BIGINT.UNSIGNED, primaryKey: true, autoIncrement: true },
       username: {
         type: DataTypes.STRING,
         validate: {
@@ -26,29 +21,30 @@ module.exports = function (sequelize, DataTypes) {
       },
 
       displayname: { type: DataTypes.STRING }
-    },
-    {
-      tableName: "User"
-    }
+    }, {
+    tableName: 'User'
+  }
   );
 
   User.associate = (models) => {
-    User.belongsToMany(models.User, {
+
+    User.belongsToMany(models.Contacts, {
       through: {
         model: 'ContactsUser',
         unique: false
       },
-      as: "Contacts",
-      foreignKey: "user_id",
-      sourceKey: "id",
+      as: 'Contacts',
+      foreignKey: 'user_id',
+      sourceKey: 'id',
       constraints: false
     });
-  };
 
+
+  }
 
   User.beforeCreate((user, _) => {
     user.password = passwordHash(user.password);
   });
 
   return User;
-};
+}
