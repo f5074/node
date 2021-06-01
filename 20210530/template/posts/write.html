@@ -1,0 +1,31 @@
+{% set title = "제품 등록" %} {% extends "layout/base.html" %} {% block content
+-%}
+<form action="" method="post">
+  <table class="table table-bordered">
+    <tr>
+      <th>title</th>
+      <td>
+        <input
+          type="text"
+          name="title"
+          class="form-control"
+          value="{{ post.title }}"
+        />
+      </td>
+    </tr>
+    <tr>
+      <th>content</th>
+      <td>
+        <input
+          type="text"
+          name="content"
+          class="form-control"
+          value="{{ post.content }}"
+        />
+      </td>
+    </tr>
+  </table>
+  <button class="btn btn-primary">작성하기</button>
+</form>
+
+{% endblock %}

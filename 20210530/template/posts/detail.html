@@ -1,0 +1,19 @@
+{% set title = "관리자 : 상세페이지" %} {% extends "layout/base.html" %} {%
+block content -%}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    {{ post.title }}
+  </div>
+  <div class="panel-body">
+    <div style="padding-bottom: 10px;">
+      작성일 : {{ post.dateFormat( post.createdAt ) }}
+    </div>
+    {{ post.content }}
+    <hr />
+  </div>
+</div>
+
+<a href="/posts" class="btn btn-default">목록으로</a>
+<a href="/posts/edit/{{ post.id }}" class="btn btn-primary">수정</a>
+
+{% endblock %}
